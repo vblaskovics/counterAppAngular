@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:alpine AS build
 WORKDIR /counterAppAngular
 RUN npm cache clean --force
 COPY . .
