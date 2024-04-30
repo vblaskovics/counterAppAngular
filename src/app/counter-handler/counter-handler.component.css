@@ -1,0 +1,21 @@
+#numberManage {
+    text-align: center;
+    margin-top: 40vh;
+}
+
+:host {
+    color: white;
+}
+
+p {
+    font-size: 3rem;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+div{
+    text-align: center;
+}
+
+.form-check-input {
+    float: none;
+}

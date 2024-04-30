@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+html {
+    min-height: 100vh;
+}
+
+body {
+    background: url(./assets/wallP.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
