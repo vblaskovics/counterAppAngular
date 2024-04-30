@@ -3,9 +3,6 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'counterappangular'
-primary_region = 'ams'
-
 app = "counterappangular"
 build = {
   dockerfile = 'Dockerfile'
