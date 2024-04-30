@@ -5,7 +5,7 @@ COPY . .
 RUN npm install
 RUN npm run build --prod
 
-FROM nginx:latest
+FROM nginx:latest AS ngi
 COPY --from=build /counterAppAngular/dist/counter-app-angular /usr/share/nginx/html
 COPY /nginx.conf  /etc/nginx/conf.d/default.conf
 EXPOSE 8080
