@@ -1,5 +1,8 @@
 FROM node:slim
-WORKDIR /counterApp
+WORKDIR /counterAppAngular
+COPY package*.json ./
+RUN npm install
 COPY . .
-RUN npm ci
-CMD ng build
+RUN npm run build
+EXPOSE 4200
+CMD ["npm", "start"]
