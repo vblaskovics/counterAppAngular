@@ -3,7 +3,7 @@ WORKDIR /counterAppAngular
 RUN npm cache clean --force
 COPY . .
 RUN npm install
-RUN npm run build --configuration production
+RUN npm run build
 
 FROM nginx:latest AS ngi
 COPY --from=build /counterAppAngular/dist/counter-app-angular /usr/share/nginx/html
