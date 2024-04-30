@@ -5,7 +5,7 @@
 
 app = "counterappangular"
 [build]
-  dockerfile = "Dockerfile.test"
+  dockerfile = "Dockerfile"
 primary_region = "ams"
 
 [http_service]
