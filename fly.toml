@@ -6,8 +6,12 @@
 app = 'counterappangular'
 primary_region = 'ams'
 
-[build]
+app = "counterappangular"
+build = {
   dockerfile = 'Dockerfile'
+ }
+  primary_region = "ams"
+
 [http_service]
   auto_start_machines = true
   auto_stop_machines = true
