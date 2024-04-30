@@ -1,7 +1,7 @@
 FROM node:slim
 WORKDIR /counterAppAngular
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 COPY . .
 RUN npm run build
 EXPOSE 4200
