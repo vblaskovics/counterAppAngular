@@ -4,10 +4,9 @@
 #
 
 app = "counterappangular"
-build = {
-  dockerfile = 'Dockerfile'
- }
-  primary_region = "ams"
+[build]
+  dockerfile = "Dockerfile.test"
+primary_region = "ams"
 
 [http_service]
   auto_start_machines = true
