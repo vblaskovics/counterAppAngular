@@ -37,7 +37,7 @@ export class CounterHandlerComponent implements OnInit {
     await this.updateCounter();
   }
 
-  continuousIncrease(e: Event) {
+  autoIncrementChange(e: Event) {
     this.clearUpdateInterval();
 
     if(this.isAutoIncrement()){
@@ -46,7 +46,7 @@ export class CounterHandlerComponent implements OnInit {
     }
   }
 
-  continuousDecrease(e: Event) {
+  autoDecrementChange(e: Event) {
     this.clearUpdateInterval();
 
     if(this.isAutoDecrement()){
