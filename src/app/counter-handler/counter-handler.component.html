@@ -1,15 +1,25 @@
 <div id="numberManage">
     <p>{{ count() }}</p>
-    <button class="btn btn-success mx-1" (click)="increaseNumber()">Increase</button>
-    <button class="btn btn-danger mx-1" (click)="decreaseNumber()">Decrease</button>
+    <button class="btn btn-success mx-1" (click)="increaseCounter()">Increase</button>
+    <button class="btn btn-danger mx-1" (click)="decreaseCounter()">Decrease</button>
 </div>
 
-<div class="form-check mt-3">
+<!-- <div class="form-check mt-3">
     <input #continuousIncreaseCheck class="form-check-input mx-1" type="checkbox" value="" id="continuousIncreaseCheck" (change)="continuousIncrease($event)">
     <label class="form-check-label" for="continuousIncreaseCheck">Check for continuous increase!</label>
+</div> -->
+
+<!-- <div class="form-check mt-3">
+    <input #continuousDecreaseCheck class="form-check-input mx-1" type="checkbox" value="" id="continuousDecreaseCheck" (change)="continuousDecrease($event)">
+    <label class="form-check-label" for="continuousDecreaseCheck">Check for continuous decrease!</label>
+</div> -->
+
+<div class="form-check mt-3">
+  <input class="form-check-input mx-1" id="autoIncrementCheck" type="checkbox" [(ngModel)]="isAutoIncrement" (change)="continuousIncrease($event)"  >
+  <label class="form-check-label" for="autoIncrementCheck">Check for continuous increase!</label>
 </div>
 
 <div class="form-check mt-3">
-    <input #continuousDecreaseCheck class="form-check-input mx-1" type="checkbox" value="" id="continuousDecreaseCheck" (change)="continuousDecrease($event)">
-    <label class="form-check-label" for="continuousDecreaseCheck">Check for continuous decrease!</label>
+  <input class="form-check-input mx-1" id="autoDecrementCheck" type="checkbox" [(ngModel)]="isAutoDecrement" (change)="continuousDecrease($event)" >
+  <label class="form-check-label" for="autoDecrementCheck">Check for continuous decrease!</label>
 </div>

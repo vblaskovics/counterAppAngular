@@ -1,81 +1,72 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, inject, signal } from '@angular/core';
 import { CounterServiceService } from '../counterService/counter-service.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-counter-handler',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './counter-handler.component.html',
   styleUrl: './counter-handler.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CounterHandlerComponent implements OnInit {
-
-  constructor(
-    private counterService: CounterServiceService,
-  ) { }
+  counterService = inject(CounterServiceService)
 
   count = signal(0);
+  isAutoIncrement = signal(false);
+  isAutoDecrement = signal(false);
+  autoInterval?: ReturnType<typeof setInterval>;
 
-  getNumber() {
-    return this.counterService.getNumberFromServer();
+  async ngOnInit() {
+    await this.updateCounter();
   }
 
-  increaseNumber() {
-    this.counterService.increaseNumberOnServer()
-      .then(res => {
-        this.count.set(res)
-      })
+  async updateCounter() {
+    const counterValue = await this.counterService.getCounterFromServer();
+    this.count.set(counterValue);
   }
 
-  decreaseNumber() {
-    this.counterService.decreaseNumberOnServer()
-      .then(res => {
-        this.count.set(res)
-      })
+  async increaseCounter() {
+    await this.counterService.increaseCounterOnServer();
+    await this.updateCounter();
   }
 
-  @ViewChild('continuousIncreaseCheck') increaseCheckBox!: ElementRef;
-  @ViewChild('continuousDecreaseCheck') decreaseCheckBox!: ElementRef;
+  async decreaseCounter() {
+    await this.counterService.decreaseCounterOnServer();
+    await this.updateCounter();
+  }
 
-  id: number | ReturnType<typeof setInterval> = 0;
   continuousIncrease(e: Event) {
-    const isChecked = (<HTMLInputElement>e.target).checked;
-    if (isChecked) {
-      this.decreaseCheckBox.nativeElement.setAttribute("disabled", "")
-      this.id = setInterval(() => {
-        this.increaseNumber();
-      }, 1000)
-    }
-    else if (this.id != 0) {
-      this.decreaseCheckBox.nativeElement.removeAttribute("disabled")
-      console.log("Unchecked!")
-      clearInterval(this.id);
-      this.id = 0;
+    this.clearUpdateInterval();
+
+    if(this.isAutoIncrement()){
+      this.isAutoDecrement.set(false);
+      this.createUpdateInterval();
     }
   }
 
   continuousDecrease(e: Event) {
-    const isChecked = (<HTMLInputElement>e.target).checked;
-    if (isChecked) {
-      this.increaseCheckBox.nativeElement.setAttribute("disabled", "")
-      console.log("Checked!")
-      this.id = setInterval(() => {
-        this.decreaseNumber();
-      }, 1000)
-    }
-    else if (this.id != 0) {
-      this.increaseCheckBox.nativeElement.removeAttribute("disabled")
-      console.log("Unchecked!")
-      clearInterval(this.id);
-      this.id = 0;
+    this.clearUpdateInterval();
+
+    if(this.isAutoDecrement()){
+      this.isAutoIncrement.set(false);
+      this.createUpdateInterval();
     }
   }
 
-
-  ngOnInit(): void {
-    this.getNumber().then(res => {
-      this.count.set(res);
-    })
+  createUpdateInterval() {
+    this.autoInterval = setInterval(() => {
+      if (this.isAutoIncrement()) {
+        this.increaseCounter();
+      } else if (this.isAutoDecrement()) {
+        this.decreaseCounter();
+      }
+    }, 1000);
   }
+
+  clearUpdateInterval() {
+    clearInterval(this.autoInterval);
+  }
+
 }
