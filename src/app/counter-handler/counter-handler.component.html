@@ -5,11 +5,11 @@
 </div>
 
 <div class="form-check mt-3">
-  <input class="form-check-input mx-1" id="autoIncrementCheck" type="checkbox" [(ngModel)]="isAutoIncrement" (change)="autoIncrementChange($event)"  >
+  <input class="form-check-input mx-1" id="autoIncrementCheck" type="checkbox" [(ngModel)]="isAutoIncrement" (change)="autoIncrementChange()"  >
   <label class="form-check-label" for="autoIncrementCheck">Check for continuous increase!</label>
 </div>
 
 <div class="form-check mt-3">
-  <input class="form-check-input mx-1" id="autoDecrementCheck" type="checkbox" [(ngModel)]="isAutoDecrement" (change)="autoDecrementChange($event)" >
+  <input class="form-check-input mx-1" id="autoDecrementCheck" type="checkbox" [(ngModel)]="isAutoDecrement" (change)="autoDecrementChange()" >
   <label class="form-check-label" for="autoDecrementCheck">Check for continuous decrease!</label>
 </div>
